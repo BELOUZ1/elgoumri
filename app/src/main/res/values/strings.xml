@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">El Goumri</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="mapbox_access_token">sk.eyJ1IjoidGFyZWtkZXYiLCJhIjoiY2xiOXhsankyMHpjbzQwcmVmZ2x6NW9kOSJ9.5QhEdykgiBd8foaTGRZg-Q</string>
+
+    <string-array name="categories">
+        <item>Bagages</item>
+        <item>Médicaments</item>
+        <item>Documents</item>
+        <item>Autres</item>
+    </string-array>
+
+    <string-array name="devise_items">
+        <item>DZD</item>
+        <item>€</item>
+        <item>$</item>
+    </string-array>
+</resources>

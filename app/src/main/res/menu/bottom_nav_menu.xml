@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_pigeon_icon2"
+        android:iconTint="@color/color_2"
+        android:title="El Goumri" />
+
+    <item
+        android:id="@+id/navigation_searche"
+        android:icon="@drawable/ic_baseline_search_24"
+        android:iconTint="@color/color_2"
+        android:title="Rechercher" />
+
+    <item
+        android:id="@+id/navigation_compte"
+        android:icon="@drawable/ic_user"
+        android:iconTint="@color/color_2"
+        android:title="Mon Compte" />
+
+</menu>

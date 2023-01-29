@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.app.elgoumri.home.ui.home.HomeFragment"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/navigation_searche"
+        android:name="com.app.elgoumri.home.ui.searche.SearcheFragment"
+        tools:layout="@layout/fragment_searche" />
+
+    <activity
+        android:id="@+id/navigation_compte"
+        android:name="com.app.elgoumri.user.ConnexionActivity"
+        tools:layout="@layout/fragment_compte"
+        />
+
+</navigation>

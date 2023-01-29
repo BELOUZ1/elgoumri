@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "914157358102",
+    "firebase_url": "https://elgoumri-3cf4a-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "elgoumri-3cf4a",
+    "storage_bucket": "elgoumri-3cf4a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:914157358102:android:7dd69102e794f14cd7b937",
+        "android_client_info": {
+          "package_name": "com.app.elgoumri"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "914157358102-0fm0mm2amhdaaplv04t2t4p9anst1fe6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEdpRfst6RrtVPuBOTRR38Y88IV2wk14k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "914157358102-0fm0mm2amhdaaplv04t2t4p9anst1fe6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
