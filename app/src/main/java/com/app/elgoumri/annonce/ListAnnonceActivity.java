@@ -1,19 +1,20 @@
 package com.app.elgoumri.annonce;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-
 import com.app.elgoumri.R;
 import com.app.elgoumri.adapter.AnnonceAdapter;
 import com.app.elgoumri.bean.Annonce;
 import com.app.elgoumri.bean.Constants;
+import com.app.elgoumri.bean.SessionManager;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -34,6 +35,7 @@ public class ListAnnonceActivity extends AppCompatActivity implements View.OnCli
     private RecyclerView recyclerView;
     private Intent viewAnnonceIntent;
     private boolean estMoi;
+    private SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,7 @@ public class ListAnnonceActivity extends AppCompatActivity implements View.OnCli
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         adapter = new AnnonceAdapter(annonces, this, estMoi);
+        sessionManager = new SessionManager(this);
         recyclerView.setAdapter(adapter);
         getAnnonces();
         ajouterAnnonceFAB.setOnClickListener(this);
@@ -86,7 +89,14 @@ public class ListAnnonceActivity extends AppCompatActivity implements View.OnCli
                 annonces.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Annonce annonce = postSnapshot.getValue(Annonce.class);
-                    annonces.add(annonce);
+                    if(estMoi){
+                        if(annonce.getUtilisateur().getId().equals(sessionManager.getUserFromSession().getId())){
+                            annonces.add(annonce);
+                        }
+                    }else{
+                        annonces.add(annonce);
+                    }
+
                 }
                 adapter.notifyDataSetChanged();
             }

@@ -5,14 +5,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.app.elgoumri.R;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.app.elgoumri.R;
 import com.app.elgoumri.annonce.ListAnnonceActivity;
 import com.app.elgoumri.bean.Annonce;
-import com.app.elgoumri.home.ElGoumriActivity;
 import com.app.elgoumri.home.ui.home.HomeFragment;
 import com.app.elgoumri.home.ui.searche.SearcheFragment;
 

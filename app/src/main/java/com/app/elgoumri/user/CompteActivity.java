@@ -1,19 +1,18 @@
 package com.app.elgoumri.user;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.telephony.PhoneNumberUtils;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.app.elgoumri.R;
 import com.app.elgoumri.bean.Constants;
-import com.app.elgoumri.bean.UserFactory;
+import com.app.elgoumri.bean.SessionManager;
 import com.app.elgoumri.bean.Utilisateur;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -21,7 +20,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber;
-import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber.CountryCodeSource;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -42,6 +40,7 @@ public class CompteActivity extends AppCompatActivity implements View.OnClickLis
     private ProgressDialog progressDoalog ;
 
     private PhoneNumberUtil phoneNumberUtil;
+    private SessionManager sessionManager;
 
     private String sNom;
     private String sPrenom;
@@ -49,6 +48,7 @@ public class CompteActivity extends AppCompatActivity implements View.OnClickLis
     private String sEmail;
     private String sMotDePasse;
     private boolean estUpdate;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,15 +72,16 @@ public class CompteActivity extends AppCompatActivity implements View.OnClickLis
 
         mAuth = FirebaseAuth.getInstance();
         firebaseUser =  FirebaseDatabase.getInstance().getReference(Utilisateur.class.getSimpleName().toLowerCase());
-
+        sessionManager = new SessionManager(this);
         phoneNumberUtil = PhoneNumberUtil.getInstance();
 
         if(update){
-            nomET.setText(UserFactory.getUtilisateur().getNom());
-            prenomET.setText(UserFactory.getUtilisateur().getPrenom());
-            telephoneET.setText(UserFactory.getUtilisateur().getTelephone());
-            emailET.setText(UserFactory.getUtilisateur().getEmail());
-            motDePasseET.setText(UserFactory.getUtilisateur().getPasswor());
+            Utilisateur utilisateur = sessionManager.getUserFromSession();
+            nomET.setText(utilisateur.getNom());
+            prenomET.setText(utilisateur.getPrenom());
+            telephoneET.setText(utilisateur.getTelephone());
+            emailET.setText(utilisateur.getEmail());
+            motDePasseET.setText(utilisateur.getPasswor());
             emailET.setEnabled(false);
             motDePasseET.setEnabled(false);
         }

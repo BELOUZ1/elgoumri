@@ -1,11 +1,7 @@
 package com.app.elgoumri.user;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
@@ -16,17 +12,17 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.app.elgoumri.R;
-import com.app.elgoumri.bean.UserFactory;
+import com.app.elgoumri.bean.SessionManager;
 import com.app.elgoumri.bean.Utilisateur;
 import com.app.elgoumri.utils.AlertDialogUtils;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseNetworkException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.database.DataSnapshot;
@@ -51,6 +47,7 @@ public class ConnexionActivity extends AppCompatActivity implements View.OnClick
 
     private FirebaseAuth mAuth;
     private DatabaseReference firebaseUser;
+    private SessionManager sessionManager;
 
     private ProgressDialog progressDoalog ;
 
@@ -72,6 +69,7 @@ public class ConnexionActivity extends AppCompatActivity implements View.OnClick
 
         alertDialogUtils = new AlertDialogUtils(this);
         confirmationDialog = new AlertDialogUtils(this);
+        sessionManager = new SessionManager(this);
 
         nvCompteIntent = new Intent(this, CompteActivity.class);
         profileIntent = new Intent(this, ProfileActivity.class);
@@ -186,7 +184,7 @@ public class ConnexionActivity extends AppCompatActivity implements View.OnClick
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Utilisateur utilisateur = dataSnapshot.getValue(Utilisateur.class);
-                UserFactory.setUtilisateur(utilisateur);
+                sessionManager.createSession(utilisateur);
                 progressDoalog.dismiss();
                 startActivity(profileIntent);
             }

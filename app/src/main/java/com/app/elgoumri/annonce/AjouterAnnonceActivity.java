@@ -1,9 +1,5 @@
 package com.app.elgoumri.annonce;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -17,11 +13,12 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.app.elgoumri.R;
 import com.app.elgoumri.bean.Annonce;
-import com.app.elgoumri.bean.UserFactory;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+import com.app.elgoumri.bean.SessionManager;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.mapbox.api.geocoding.v5.models.CarmenFeature;
@@ -31,7 +28,6 @@ import com.mapbox.mapboxsdk.plugins.places.autocomplete.model.PlaceOptions;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Calendar;
-import java.util.Locale;
 
 public class AjouterAnnonceActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener, View.OnClickListener {
 
@@ -57,6 +53,7 @@ public class AjouterAnnonceActivity extends AppCompatActivity implements RadioGr
     private Annonce mAnnonce;
     private Intent placeIntent;
     private DatabaseReference refAnnonce;
+    private SessionManager sessionManager;
     private static final int ADRESSE_DEP = 1;
     private static final int ADRESSE_ARV = 2;
 
@@ -75,6 +72,8 @@ public class AjouterAnnonceActivity extends AppCompatActivity implements RadioGr
         dateA = findViewById(R.id.date_a_et);
         dateD = findViewById(R.id.date_d_et);
         layout = findViewById(R.id.prix_ll);
+
+        sessionManager = new SessionManager(this);
 
         setMapBox();
         setCategories();
@@ -257,7 +256,7 @@ public class AjouterAnnonceActivity extends AppCompatActivity implements RadioGr
         }
 
         mAnnonce.setCategorie(spinner.getSelectedItem().toString());
-        mAnnonce.setUtilisateur(UserFactory.getUtilisateur());
+        mAnnonce.setUtilisateur(sessionManager.getUserFromSession());
         mAnnonce.setDevise(deviseSP.getSelectedItem().toString());
         mAnnonce.setAdressArriveID(adresseAID);
         mAnnonce.setAdresseDepartID(adresseDID);

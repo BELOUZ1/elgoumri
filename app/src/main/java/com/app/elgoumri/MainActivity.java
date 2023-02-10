@@ -1,7 +1,5 @@
 package com.app.elgoumri;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.animation.Animation;
@@ -9,8 +7,9 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.app.elgoumri.home.ElGoumriActivity;
-import com.app.elgoumri.user.ConnexionActivity;
 
 public class MainActivity extends AppCompatActivity {
 

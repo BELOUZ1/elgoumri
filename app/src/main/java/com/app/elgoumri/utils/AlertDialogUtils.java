@@ -2,8 +2,6 @@ package com.app.elgoumri.utils;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-
 
 import com.app.elgoumri.R;
 

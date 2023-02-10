@@ -20,8 +20,9 @@ public class Utilisateur implements Serializable {
         return id;
     }
 
-    public void setId(String id) {
+    public Utilisateur setId(String id) {
         this.id = id;
+        return this;
     }
 
     public String getNom() {
