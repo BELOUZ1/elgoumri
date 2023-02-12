@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,6 +41,8 @@ public class MessagesActivity extends AppCompatActivity implements View.OnClickL
     private EditText messageET;
     private ImageView sendMassageImg;
     private RecyclerView listMessageRV;
+    private TextView userMessage;
+    private TextView annonceMessage;
     private DatabaseReference messageRef;
     private SessionManager sessionManager;
     private String idReceiver;
@@ -62,9 +65,11 @@ public class MessagesActivity extends AppCompatActivity implements View.OnClickL
         messageET = findViewById(R.id.message_et);
         sendMassageImg = findViewById(R.id.send_message_img);
         listMessageRV = findViewById(R.id.list_messages_rv);
+        userMessage = findViewById(R.id.user_message_tv);
+        annonceMessage = findViewById(R.id.annonce_message_tv);
 
         sessionManager = new SessionManager(this);
-        dateFormat = new SimpleDateFormat("mm-dd hh:mm");
+        dateFormat = new SimpleDateFormat("MM-dd HH:mm");
         dataHelper = new DataHelper(this);
 
         initTransaction();
@@ -76,7 +81,7 @@ public class MessagesActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void initRecyclerView() {
-        adapter = new MessageAdapter(messages, idReceiver);
+        adapter = new MessageAdapter(messages, sessionManager.getUserFromSession().getId());
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         listMessageRV.setLayoutManager(mLayoutManager);
         listMessageRV.setItemAnimator(new DefaultItemAnimator());
@@ -88,23 +93,26 @@ public class MessagesActivity extends AppCompatActivity implements View.OnClickL
         boolean fromTransaction = intent.getBooleanExtra(Constants.FROM_TRANSACTION_KEY, false);
         if(fromTransaction){
             Transaction transaction = (Transaction) intent.getSerializableExtra(Constants.TRANSACTION_KEY);
-            idReceiver = transaction.getIdReceiver();
             titreAnnonce = transaction.getAnnonce();
-            idSender = transaction.getIdSender();
-            receiver = transaction.getReceiver();
             idTransaction = transaction.getId();
+            annonceMessage.setText(transaction.getAnnonce());
+            if(transaction.getIdUser1().equals(sessionManager.getUserFromSession().getId())){
+                userMessage.setText(transaction.getUser2());
+            }else{
+                userMessage.setText(transaction.getUser1());
+            }
             createTransaction =false;
         }else{
             Annonce annonce = (Annonce) intent.getSerializableExtra(Constants.ANNONCE_KEY);
             idReceiver = annonce.getUtilisateur().getId();
             titreAnnonce = annonce.getTitre();
-            receiver = annonce.getUtilisateur().getPrenom();
+            annonceMessage.setText(titreAnnonce);
+            receiver = annonce.getUtilisateur().getPrenom() + " " + annonce.getUtilisateur().getNom();
             createTransaction = true;
             idSender = sessionManager.getUserFromSession().getId();
             idTransaction = idSender + "-" + idReceiver + "-" + annonce.getId();
+            userMessage.setText(receiver);
         }
-
-
 
         transactionRef = FirebaseDatabase.getInstance().getReference(Transaction.class.getSimpleName().toLowerCase());
         messageRef = FirebaseDatabase.getInstance().getReference(Message.class.getSimpleName().toLowerCase()).child(idTransaction);
@@ -131,27 +139,28 @@ public class MessagesActivity extends AppCompatActivity implements View.OnClickL
         mMessage.setId(idMessage);
         mMessage.setIdSender(sessionManager.getUserFromSession().getId());
         mMessage.setContent(message);
-
-        if(idReceiver.equals(sessionManager.getUserFromSession().getId())){
-            mMessage.setIdReceiver(idSender);
-        }else {
-            mMessage.setIdReceiver(idReceiver);
-        }
-
         mMessage.setTime(time);
 
         messageRef.child(idMessage).setValue(mMessage);
     }
 
     private void createTransaction(){
-        String sender = sessionManager.getUserFromSession().getPrenom();
+        String sender = sessionManager.getUserFromSession().getPrenom() + " " + sessionManager.getUserFromSession().getNom();
         if(!dataHelper.existeTransaction(idTransaction)){
             Transaction transaction = new Transaction();
             transaction.setId(idTransaction);
-            transaction.setIdSender(idSender);
-            transaction.setIdReceiver(idReceiver);
-            transaction.setSender(sender);
-            transaction.setReceiver(receiver);
+            if(idSender.equals(sessionManager.getUserFromSession().getId())){
+                transaction.setUser1(sender);
+                transaction.setIdUser1(idSender);
+                transaction.setUser2(receiver);
+                transaction.setIdUser2(idReceiver);
+            }else{
+                transaction.setUser2(sender);
+                transaction.setIdUser2(idSender);
+                transaction.setUser1(receiver);
+                transaction.setIdUser1(idReceiver);
+            }
+
             transaction.setAnnonce(titreAnnonce);
             transactionRef.child(idTransaction).setValue(transaction);
             createTransaction = false;

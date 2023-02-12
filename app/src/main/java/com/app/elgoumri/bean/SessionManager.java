@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 
 import com.app.elgoumri.user.ConnexionActivity;
 import com.app.elgoumri.user.ProfileActivity;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.HashMap;
 
@@ -79,9 +80,10 @@ public class SessionManager {
         return user;
     }
 
-    public void logout(Activity activity){
+    public void logout(){
         editor.clear();
         editor.commit();
+        FirebaseAuth.getInstance().signOut();
         ((Activity) context).finish();
     }
 

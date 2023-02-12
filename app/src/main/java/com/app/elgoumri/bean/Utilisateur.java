@@ -12,9 +12,15 @@ public class Utilisateur implements Serializable {
 
     private String email;
 
+    private boolean emailVerif;
+
     private String telephone;
 
+    private boolean telephoneVerif;
+
     private String passwor;
+
+    private int colorUser;
 
     public String getId() {
         return id;
@@ -67,6 +73,33 @@ public class Utilisateur implements Serializable {
 
     public Utilisateur setPasswor(String passwor) {
         this.passwor = passwor;
+        return this;
+    }
+
+    public boolean isEmailVerif() {
+        return emailVerif;
+    }
+
+    public Utilisateur setEmailVerif(boolean emailVerif) {
+        this.emailVerif = emailVerif;
+        return this;
+    }
+
+    public boolean isTelephoneVerif() {
+        return telephoneVerif;
+    }
+
+    public Utilisateur setTelephoneVerif(boolean telephoneVerif) {
+        this.telephoneVerif = telephoneVerif;
+        return this;
+    }
+
+    public int getColorUser() {
+        return colorUser;
+    }
+
+    public Utilisateur setColorUser(int colorUser) {
+        this.colorUser = colorUser;
         return this;
     }
 }

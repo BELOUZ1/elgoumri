@@ -10,7 +10,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/update_profile_cv"
         android:layout_width="0dp"
-        android:layout_height="80dp"
+        android:layout_height="56dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
@@ -25,11 +25,11 @@
 
             <ImageView
                 android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -64,8 +64,8 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/messages_cv"
         android:layout_width="0dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="32dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="24dp"
         android:elevation="@dimen/cardview_default_elevation"
         app:layout_constraintEnd_toEndOf="@+id/update_profile_cv"
         app:layout_constraintStart_toStartOf="@+id/update_profile_cv"
@@ -114,8 +114,8 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/list_annonce_cv"
         android:layout_width="0dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="32dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="@+id/messages_cv"
         app:layout_constraintStart_toStartOf="@+id/messages_cv"
         app:layout_constraintTop_toBottomOf="@+id/messages_cv">
@@ -181,6 +181,8 @@
                 android:id="@+id/imageView7"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -206,8 +208,8 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/deconnecter_cv"
         android:layout_width="0dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="32dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="@+id/list_annonce_cv"
         app:layout_constraintStart_toStartOf="@+id/list_annonce_cv"
         app:layout_constraintTop_toBottomOf="@+id/list_annonce_cv">
@@ -243,6 +245,33 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView4"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/supprimer_compt_cv"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/deconnecter_cv"
+        app:layout_constraintStart_toStartOf="@+id/deconnecter_cv">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Supprimer mon compte"
+                android:textColor="@color/red"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

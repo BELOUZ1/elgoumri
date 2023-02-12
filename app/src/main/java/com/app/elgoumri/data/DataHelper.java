@@ -34,8 +34,8 @@ public class DataHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("idTransaction", transaction.getId());
-        contentValues.put("idUser1", transaction.getIdSender());
-        contentValues.put("idUser2", transaction.getIdReceiver());
+        contentValues.put("idUser1", transaction.getIdUser1());
+        contentValues.put("idUser2", transaction.getIdUser2());
         db.insert("tTransactions", null, contentValues);
         return true;
     }

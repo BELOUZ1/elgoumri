@@ -72,7 +72,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 startActivity(messagesIntent);
                 break;
             case R.id.deconnecter_cv:
-                sessionManager.logout(this);
+                sessionManager.logout();
                 break;
             default:
                 break;

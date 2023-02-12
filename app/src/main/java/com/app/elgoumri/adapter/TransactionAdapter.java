@@ -13,6 +13,8 @@ import com.app.elgoumri.R;
 import com.app.elgoumri.bean.Transaction;
 import com.app.elgoumri.chat.UsersActivity;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.MyViewHolder>{
@@ -40,11 +42,19 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Transaction transaction = transactionList.get(position);
         holder.annonce.setText(transaction.getAnnonce());
-        if(transaction.getIdSender().equals(idUser)){
-            holder.sender.setText(transaction.getReceiver());
+        String initials;
+
+        if(transaction.getIdUser1().equals(idUser)){
+            initials = transaction.getUser2();
+            holder.sender.setText(transaction.getUser2());
         }else{
-            holder.sender.setText(transaction.getSender());
+            initials = transaction.getUser1();
+            holder.sender.setText(transaction.getUser1());
         }
+
+        String initialNom = String.valueOf(initials.split(" ")[1].charAt(0)).toUpperCase();
+        String initialPrenom = String.valueOf(initials.split(" ")[0].charAt(0)).toUpperCase();
+        holder.initials.setText(initialPrenom + initialNom);
 
     }
 
@@ -57,6 +67,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
         private TextView sender;
         private TextView annonce;
+        private TextView initials;
         private CardView transactionCV;
 
         public MyViewHolder(View view) {
@@ -64,6 +75,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
             sender = view.findViewById(R.id.sender_tv);
             annonce = view.findViewById(R.id.annonceitem_tv);
             transactionCV = view.findViewById(R.id.transaction_cv);
+            initials = view.findViewById(R.id.initials_tv);
 
             transactionCV.setOnClickListener(this);
         }

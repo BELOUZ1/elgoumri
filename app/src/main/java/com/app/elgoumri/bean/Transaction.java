@@ -6,13 +6,13 @@ public class Transaction implements Serializable {
 
     private String id;
 
-    private String idSender;
+    private String idUser1;
 
-    private String idReceiver;
+    private String idUser2;
 
-    private String sender;
+    private String user1;
 
-    private String receiver;
+    private String user2;
 
     private String annonce;
 
@@ -24,14 +24,6 @@ public class Transaction implements Serializable {
         this.annonce = annonce;
     }
 
-    public String getSender() {
-        return sender;
-    }
-
-    public void setSender(String sender) {
-        this.sender = sender;
-    }
-
     public String getId() {
         return id;
     }
@@ -40,27 +32,35 @@ public class Transaction implements Serializable {
         this.id = id;
     }
 
-    public String getIdSender() {
-        return idSender;
+    public String getIdUser1() {
+        return idUser1;
     }
 
-    public void setIdSender(String idSender) {
-        this.idSender = idSender;
+    public void setIdUser1(String idUser1) {
+        this.idUser1 = idUser1;
     }
 
-    public String getIdReceiver() {
-        return idReceiver;
+    public String getIdUser2() {
+        return idUser2;
     }
 
-    public void setIdReceiver(String idReceiver) {
-        this.idReceiver = idReceiver;
+    public void setIdUser2(String idUser2) {
+        this.idUser2 = idUser2;
     }
 
-    public String getReceiver() {
-        return receiver;
+    public String getUser1() {
+        return user1;
     }
 
-    public void setReceiver(String receiver) {
-        this.receiver = receiver;
+    public void setUser1(String user1) {
+        this.user1 = user1;
+    }
+
+    public String getUser2() {
+        return user2;
+    }
+
+    public void setUser2(String user2) {
+        this.user2 = user2;
     }
 }

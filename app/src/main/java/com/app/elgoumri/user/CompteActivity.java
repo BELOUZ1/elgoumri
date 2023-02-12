@@ -1,6 +1,7 @@
 package com.app.elgoumri.user;
 
 import android.app.ProgressDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -24,6 +25,7 @@ import com.google.i18n.phonenumbers.Phonenumber;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Locale;
+import java.util.Random;
 
 public class CompteActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -201,7 +203,8 @@ public class CompteActivity extends AppCompatActivity implements View.OnClickLis
                 .setPrenom(sPrenom)
                 .setEmail(sEmail)
                 .setTelephone(internationalFormat)
-                .setPasswor(sMotDePasse);
+                .setPasswor(sMotDePasse)
+                .setColorUser(getRandomColor());
 
         return utilisateur;
     }
@@ -209,7 +212,6 @@ public class CompteActivity extends AppCompatActivity implements View.OnClickLis
     private boolean checkPhoneNumber(){
         try {
             Phonenumber.PhoneNumber phone = phoneNumberUtil.parse(sTelephone, Locale.getDefault().getCountry());
-            String internationalFormat = phoneNumberUtil.format(phone, PhoneNumberUtil.PhoneNumberFormat.INTERNATIONAL);
             return phoneNumberUtil.isValidNumber(phone);
         } catch (NumberParseException e) {
             return false;
@@ -223,5 +225,11 @@ public class CompteActivity extends AppCompatActivity implements View.OnClickLis
         }
         return false;
     }
+
+    public int getRandomColor(){
+        Random rnd = new Random();
+        return Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+    }
+
 
 }

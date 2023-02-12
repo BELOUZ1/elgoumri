@@ -6,10 +6,10 @@
     android:layout_marginBottom="8dp">
 
     <LinearLayout
+        android:id="@+id/message_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:id="@+id/message_ll"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,10 +20,19 @@
             android:id="@+id/message_item_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:paddingHorizontal="16dp"
-            android:paddingVertical="4dp"
+            android:background="@drawable/messageshape"
+            android:maxWidth="240dp"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="8dp"
             android:text="Message"
+            android:textColor="@color/white"
             android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/time_msg_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="04H10"
+            android:textSize="12dp"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

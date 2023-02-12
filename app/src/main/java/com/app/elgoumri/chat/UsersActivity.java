@@ -55,7 +55,7 @@ public class UsersActivity extends AppCompatActivity {
                 transactionList.clear();
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                     Transaction transaction = postSnapshot.getValue(Transaction.class);
-                    if(transaction.getIdSender().equals(idUser) || transaction.getIdReceiver().equals(idUser)){
+                    if(transaction.getIdUser1().equals(idUser) || transaction.getIdUser2().equals(idUser)){
                         transactionList.add(transaction);
                     }
                 }

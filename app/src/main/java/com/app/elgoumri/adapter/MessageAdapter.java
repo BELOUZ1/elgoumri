@@ -19,11 +19,11 @@ import java.util.List;
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MyViewHolder>{
 
     private List<Message> messageList;
-    private String idReceiver;
+    private String idSender;
 
-    public MessageAdapter(List<Message> messageList, String idReceiver) {
+    public MessageAdapter(List<Message> messageList, String idSender) {
         this.messageList = messageList;
-        this.idReceiver = idReceiver;
+        this.idSender = idSender;
     }
 
     @NonNull
@@ -38,8 +38,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MyViewHo
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Message message = messageList.get(position);
         holder.message.setText(message.getContent());
-
-        if(message.getIdSender().equals(idReceiver)){
+        holder.time.setText(message.getTime().trim().split(" ")[1]);
+        if(message.getIdSender().equals(idSender)){
             holder.layout.setGravity(Gravity.RIGHT);
         }else{
             holder.layout.setGravity(Gravity.LEFT);
@@ -56,12 +56,14 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MyViewHo
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         private TextView message;
+        private TextView time;
         private LinearLayout layout;
 
         public MyViewHolder(View view) {
             super(view);
             message = view.findViewById(R.id.message_item_tv);
             layout = view.findViewById(R.id.message_ll);
+            time = view.findViewById(R.id.time_msg_tv);
         }
     }
 }
